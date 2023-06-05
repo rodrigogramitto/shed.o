@@ -1,0 +1,7 @@
+{
+  "presets": ["airbnb"],
+  "plugins": [
+    "babel-plugin-styled-components",
+    "macros"
+  ]
+}
