@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
+const db = require('../index');
 
-const pushRoutineSchema = mongoose.schema({
+const pushRoutineSchema = mongoose.Schema({
+  name: String,
   technique: [String, String, String, String],
   integration: String,
   implementation: String,

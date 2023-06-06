@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const db = require('../index');
 
-const userSchema = mongoose.schema({
+const userSchema = mongoose.Schema({
   username: String,
   firstName: String,
   lastName: String,

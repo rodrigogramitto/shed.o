@@ -1,7 +1,9 @@
+/* eslint-disable no-console */
 import React, { useRef } from 'react';
 import axios from 'axios';
 
 function RoutineForm() {
+  const routineName = useRef('');
   const tech1 = useRef('');
   const tech2 = useRef('');
   const tech3 = useRef('');
@@ -12,19 +14,27 @@ function RoutineForm() {
   const handleClick = (e) => {
     e.preventDefault();
     const routine = {};
+    routine.name = routineName.current.value;
     routine.technique = [
       tech1.current.value, tech2.current.value, tech3.current.value, tech4.current.value];
     routine.integration = integration.current.value;
     routine.implementation = implementation.current.value;
-    axios.post('http://localhost:3000/routine', {
-      body: routine,
-    });
+    axios.post('http://localhost:3000/routine', routine)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
     <div>
       <h2>What are we working on today?</h2>
       <form id="practiceRoutine">
+        <label className="routineElement">
+          <input type="text" placeholder="My New Routine" ref={routineName} />
+        </label>
         <label className="routineElement">
           <h3>Technique:</h3>
           <h4>Choose Four:</h4>

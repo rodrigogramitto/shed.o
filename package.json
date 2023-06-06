@@ -7,7 +7,7 @@
   },
   "scripts": {
     "client-dev": "npx webpack --watch --mode=development",
-    "server-dev": "npx nodemon --watch server src/server/",
+    "server-dev": "npx nodemon --watch server src/server",
     "build": "npx webpack",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "fix": "eslint . --ext .js --fix"

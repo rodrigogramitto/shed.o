@@ -2,12 +2,33 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const controller = require('../db/controller/controller');
 
 const app = express();
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../../dist/')));
 app.use(express.json());
+
+app.post('/routine', (req, res) => {
+  controller.saveRoutine(req.body)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.send(err.data);
+    });
+});
+
+app.get('/routine', (req, res) => {
+  controller.findRoutine(req.body)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.send(err.data);
+    });
+});
 
 try {
   app.listen(3000, () => {

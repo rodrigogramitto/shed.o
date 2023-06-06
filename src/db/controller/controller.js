@@ -1,4 +1,5 @@
 const model = require('../models/model');
+// const db = require('../index');
 
 const findUser = async (email) => {
   try {
@@ -18,5 +19,15 @@ const findRoutine = async (name) => {
   }
 };
 
+const saveRoutine = async (routine) => {
+  try {
+    const result = await model.pushRoutine.create(routine);
+    return result;
+  } catch (err) {
+    return err;
+  }
+};
+
 module.exports.findUser = findUser;
 module.exports.findRoutine = findRoutine;
+module.exports.saveRoutine = saveRoutine;
