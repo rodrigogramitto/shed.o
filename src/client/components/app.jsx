@@ -2,6 +2,7 @@
 import React from 'react';
 import MyTimer from './Pomodoro.jsx';
 import LoginButton from './LoginButton.jsx';
+import LogoutButton from './LogoutButton.jsx';
 
 function App() {
   // const time = new Date();
@@ -9,7 +10,10 @@ function App() {
   return (
     <div>
       <h1>Shed-O</h1>
-      <LoginButton />
+      <div className="login">
+        <LoginButton />
+        <LogoutButton />
+      </div>
       <div>
         <MyTimer />
       </div>
