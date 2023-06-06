@@ -1,6 +1,26 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import axios from 'axios';
 
 function RoutineForm() {
+  const tech1 = useRef('');
+  const tech2 = useRef('');
+  const tech3 = useRef('');
+  const tech4 = useRef('');
+  const integration = useRef('');
+  const implementation = useRef('');
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    const routine = {};
+    routine.technique = [
+      tech1.current.value, tech2.current.value, tech3.current.value, tech4.current.value];
+    routine.integration = integration.current.value;
+    routine.implementation = implementation.current.value;
+    axios.post('http://localhost:3000/routine', {
+      body: routine,
+    });
+  };
+
   return (
     <div>
       <h2>What are we working on today?</h2>
@@ -8,21 +28,22 @@ function RoutineForm() {
         <label className="routineElement">
           <h3>Technique:</h3>
           <h4>Choose Four:</h4>
-          <input type="text" placeholder="Min-7 Arpeggios" />
-          <input type="text" placeholder="Chromatic Scale" />
-          <input type="text" placeholder="Coltrane permutations" />
-          <input type="text" placeholder="Pentatonic Scale" />
+          <input type="text" placeholder="Min-7 Arpeggios" ref={tech1} />
+          <input type="text" placeholder="Chromatic Scale" ref={tech2} />
+          <input type="text" placeholder="Coltrane permutations" ref={tech3} />
+          <input type="text" placeholder="Pentatonic Scale" ref={tech4} />
         </label>
         <label>
           <h3>Integration:</h3>
           <h4>Take a resource and rehearse using it practically</h4>
-          <input type="text" placeholder="Drop 3 chords" />
+          <input type="text" placeholder="Drop 3 chords" ref={integration} />
         </label>
         <label>
           <h3>Implementation:</h3>
           <h4>Play what you practiced over a tune you like</h4>
-          <textarea type="text" placeholder="Min-7 arpeggios and coltrane lines over Strasbourg St. Denis, switch every 2 choruses to comp with Drop 3 chords" />
+          <textarea type="text" placeholder="Min-7 arpeggios and coltrane lines over Strasbourg St. Denis, switch every 2 choruses to comp with Drop 3 chords" ref={implementation} />
         </label>
+        <button type="button" className="sheddingTime" onClick={handleClick}>Shedding Time</button>
       </form>
     </div>
   );
