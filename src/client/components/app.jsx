@@ -8,9 +8,11 @@ import {
   useUser,
   RedirectToSignIn,
 } from '@clerk/clerk-react';
-import 'dotenv/config';
 import MyTimer from './Pomodoro.jsx';
 
+const Dotenv = require('dotenv-webpack');
+
+Dotenv.config();
 
 if (!process.env.REACT_APP_CLERK_PUBLISHABLE_KEY) {
   // eslint-disable-next-line no-throw-literal

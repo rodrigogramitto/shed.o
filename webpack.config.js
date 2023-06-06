@@ -1,5 +1,6 @@
 const path = require('path');
-// const webpack = require('webpack');
+const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'development',
@@ -12,9 +13,19 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /nodeModules/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            sourceMaps: false,
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: [
+              ['@babel/plugin-proposal-class-properties', { loose: true }],
+              ['@babel/plugin-proposal-decorators', { legacy: true }],
+              ['@babel/plugin-transform-async-to-generator'],
+              ['@babel/plugin-transform-runtime'],
+            ],
+          },
         },
       },
       {
@@ -23,10 +34,12 @@ module.exports = {
       },
     ],
   },
-  resolve: {
-    fallback: {
-      crypto: require.resolve('crypto-browserify'),
-      buffer: require.resolve('buffer/'),
-    },
-  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+      },
+    }),
+    new Dotenv(),
+  ],
 };
