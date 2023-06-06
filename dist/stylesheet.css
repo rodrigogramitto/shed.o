@@ -12,3 +12,13 @@
     background-color: teal;
   }
 
+  #timer {
+    font-size: 70px;
+  }
+
+  #pomodoro {
+    position: fixed;
+    top: 0;
+    right: 15px;
+  }
+

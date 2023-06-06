@@ -2,7 +2,7 @@
 import React, { useRef } from 'react';
 import axios from 'axios';
 
-function RoutineForm() {
+function RoutineForm({ toggleTimer }) {
   const routineName = useRef('');
   const tech1 = useRef('');
   const tech2 = useRef('');
@@ -13,6 +13,7 @@ function RoutineForm() {
 
   const handleClick = (e) => {
     e.preventDefault();
+    toggleTimer();
     const routine = {};
     routine.name = routineName.current.value;
     routine.technique = [
@@ -32,10 +33,10 @@ function RoutineForm() {
     <div>
       <h2>What are we working on today?</h2>
       <form id="practiceRoutine">
-        <label className="routineElement">
-          <input type="text" placeholder="Today's Routine" ref={routineName} />
+        <label className="routineElement" htmlFor="RoutineName">
+          <input type="text" placeholder="Today's Routine" ref={routineName} id="RoutineName" />
         </label>
-        <label className="routineElement">
+        <label className="routineElement" htmlFor="Technique">
           <h3>Technique:</h3>
           <h4>Choose Four:</h4>
           <input type="text" placeholder="Min-7 Arpeggios" ref={tech1} />
@@ -43,12 +44,12 @@ function RoutineForm() {
           <input type="text" placeholder="Coltrane permutations" ref={tech3} />
           <input type="text" placeholder="Pentatonic Scale" ref={tech4} />
         </label>
-        <label>
+        <label htmlFor="Integration">
           <h3>Integration:</h3>
           <h4>Take a resource and rehearse using it practically</h4>
           <input type="text" placeholder="Drop 3 chords" ref={integration} />
         </label>
-        <label>
+        <label htmlFor="Implementation">
           <h3>Implementation:</h3>
           <h4>Play what you practiced over a tune you like</h4>
           <textarea type="text" placeholder="Min-7 arpeggios and coltrane lines over Strasbourg St. Denis, switch every 2 choruses to comp with Drop 3 chords" ref={implementation} />
