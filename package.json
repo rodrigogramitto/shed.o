@@ -28,6 +28,7 @@
     "prettier": "^2.8.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-timer-hook": "^3.0.6",
     "underscore": "^1.13.6",
     "webpack": "^5.85.1",
     "webpack-dev-server": "^4.15.0"

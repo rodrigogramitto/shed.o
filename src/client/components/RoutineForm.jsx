@@ -33,7 +33,7 @@ function RoutineForm() {
       <h2>What are we working on today?</h2>
       <form id="practiceRoutine">
         <label className="routineElement">
-          <input type="text" placeholder="My New Routine" ref={routineName} />
+          <input type="text" placeholder="Today's Routine" ref={routineName} />
         </label>
         <label className="routineElement">
           <h3>Technique:</h3>
