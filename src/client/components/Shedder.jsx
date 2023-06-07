@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useTimer } from 'react-timer-hook';
 import RoutineForm from './RoutineForm.jsx';
 
-function MyTimer() {
+function Shedder() {
   const [isFocusTime, setIsFocusTime] = useState(false);
   const focusTime = 25 * 60; // 25 minutes in seconds
   const restTime = 5 * 60; // 5 minutes in seconds
@@ -54,4 +54,4 @@ function MyTimer() {
   );
 }
 
-export default MyTimer;
+export default Shedder;
