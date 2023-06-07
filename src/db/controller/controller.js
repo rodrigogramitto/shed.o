@@ -10,6 +10,15 @@ const findUser = async (email) => {
   }
 };
 
+const createUser = async (user) => {
+  try {
+    const newUser = await model.user.create({ user });
+    return newUser;
+  } catch (err) {
+    return err;
+  }
+};
+
 const findRoutine = async (name) => {
   try {
     const routine = await model.pushRoutine.findOne({ name });
@@ -31,3 +40,4 @@ const saveRoutine = async (routine) => {
 module.exports.findUser = findUser;
 module.exports.findRoutine = findRoutine;
 module.exports.saveRoutine = saveRoutine;
+module.exports.createUser = createUser;

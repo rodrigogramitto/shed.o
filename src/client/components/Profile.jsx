@@ -1,25 +1,37 @@
-import React from 'react';
-import Avatar from '@mui/material/Button';
-
+/* eslint-disable no-console */
+import React, { useEffect, useState } from 'react';
+import Avatar from '@mui/material/Avatar';
 import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
 
 function Profile() {
   const { user } = useAuth0();
-  const { name, picture, email } = user;
+  const {
+    name, picture, email, nickname,
+  } = user;
+  const [routines, setRoutines] = useState([]);
+
+  useEffect(() => {
+    if (user) {
+      axios.get('/user', user)
+        .then((results) => {
+          console.log(results.body);
+          setRoutines(results.body);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [user, email]);
 
   return (
     <div>
       <div className="row align-items-center profile-header">
         <div className="col-md-2 mb-3">
-          <img
-            src={picture}
-            alt="Profile"
-            className="rounded-circle img-fluid profile-picture mb-3 mb-md-0"
-          />
+          <Avatar alt={name} src={picture} sx={{ width: 125, height: 125 }} />
         </div>
         <div className="col-md text-center text-md-left">
-          <h2>{name}</h2>
-          <p className="lead text-muted">{email}</p>
+          <h2>{nickname}</h2>
         </div>
       </div>
       <div className="row">

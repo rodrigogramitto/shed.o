@@ -30,6 +30,26 @@ app.get('/routine', (req, res) => {
     });
 });
 
+app.get('/user', (req, res) => {
+  controller.findUser(req.body.email)
+    .then((user) => {
+      res.send(user);
+    })
+    .catch((err) => {
+      if (err.data.reason === null) {
+        controller.createUser(req.body)
+          .then((newUser) => {
+            res.send(newUser);
+          })
+          .catch((Error) => {
+            res.send(Error.data);
+          });
+      } else {
+        res.send(err.data);
+      }
+    });
+});
+
 try {
   app.listen(3000, () => {
     console.log('Listening on port 3000');
