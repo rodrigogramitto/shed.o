@@ -1,10 +1,14 @@
 const model = require('../models/model');
 // const db = require('../index');
 
-const findUser = async (email) => {
+const getUser = async (user) => {
   try {
-    const user = await model.user.findOne({ email });
-    return user;
+    const foundUser = await model.user.findOneAndUpdate({ email: user.email }, user, {
+      new: true,
+      upsert: true,
+      rawResult: true,
+    });
+    return foundUser;
   } catch (err) {
     return err;
   }
@@ -37,7 +41,7 @@ const saveRoutine = async (routine) => {
   }
 };
 
-module.exports.findUser = findUser;
+module.exports.getUser = getUser;
 module.exports.findRoutine = findRoutine;
 module.exports.saveRoutine = saveRoutine;
 module.exports.createUser = createUser;

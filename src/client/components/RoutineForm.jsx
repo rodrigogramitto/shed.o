@@ -1,8 +1,9 @@
 /* eslint-disable no-console */
 import React, { useRef } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 
-function RoutineForm({ toggleTimer }) {
+function RoutineForm({ toggleTimer, setRoutines, routines }) {
   const routineName = useRef('');
   const tech1 = useRef('');
   const tech2 = useRef('');
@@ -10,6 +11,7 @@ function RoutineForm({ toggleTimer }) {
   const tech4 = useRef('');
   const integration = useRef('');
   const implementation = useRef('');
+  const { isAuthenticated, user } = useAuth0();
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -27,6 +29,17 @@ function RoutineForm({ toggleTimer }) {
       .catch((err) => {
         console.log(err);
       });
+    if (isAuthenticated) {
+      user.routines = [routineName.current.value];
+      axios.post('http://localhost:3000/user', user)
+        .then((userRoutines) => {
+          // push routine into routines
+          setRoutines(routines.concat(userRoutines));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (

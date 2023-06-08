@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useTimer } from 'react-timer-hook';
 import RoutineForm from './RoutineForm.jsx';
 
-function Shedder() {
+function Shedder({ setRoutines, routines }) {
   const [isFocusTime, setIsFocusTime] = useState(false);
   const focusTime = 25 * 60; // 25 minutes in seconds
   const restTime = 5 * 60; // 5 minutes in seconds
@@ -49,7 +49,7 @@ function Shedder() {
           Restart
         </button>
       </div>
-      <RoutineForm toggleTimer={toggleTimer} />
+      <RoutineForm toggleTimer={toggleTimer} setRoutines={setRoutines} routines={routines} />
     </div>
   );
 }

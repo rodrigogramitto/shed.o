@@ -13,17 +13,18 @@ function App() {
 
   const { isAuthenticated } = useAuth0();
   const [profileView, setProfileView] = useState(false);
+  const [routines, setRoutines] = useState([]);
 
   const view = () => {
     let componentToShow;
     if (profileView) {
       if (isAuthenticated) {
-        componentToShow = <Profile />;
+        componentToShow = <Profile routines={routines} setRoutines={setRoutines} />;
       } else {
-        componentToShow = <Shedder />;
+        componentToShow = <Shedder setRoutines={setRoutines} routines={routines} />;
       }
     } else {
-      componentToShow = <Shedder />;
+      componentToShow = <Shedder setRoutines={setRoutines} routines={routines} />;
     }
     return componentToShow;
   };

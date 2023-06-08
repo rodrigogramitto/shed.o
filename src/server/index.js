@@ -31,22 +31,12 @@ app.get('/routine', (req, res) => {
 });
 
 app.get('/user', (req, res) => {
-  controller.findUser(req.body.email)
-    .then((user) => {
-      res.send(user);
+  controller.getUser(req.body)
+    .then((data) => {
+      res.send(data.value);
     })
     .catch((err) => {
-      if (err.data.reason === null) {
-        controller.createUser(req.body)
-          .then((newUser) => {
-            res.send(newUser);
-          })
-          .catch((Error) => {
-            res.send(Error.data);
-          });
-      } else {
-        res.send(err.data);
-      }
+      res.send(err.data);
     });
 });
 

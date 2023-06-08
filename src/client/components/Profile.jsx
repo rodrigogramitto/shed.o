@@ -4,25 +4,25 @@ import Avatar from '@mui/material/Avatar';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 
-function Profile() {
+function Profile({ routines, setRoutines }) {
   const { user } = useAuth0();
   const {
     name, picture, email, nickname,
   } = user;
-  const [routines, setRoutines] = useState([]);
+  const [userRoutines, setUserRoutines] = useState([]);
 
   useEffect(() => {
     if (user) {
       axios.get('/user', user)
         .then((results) => {
           console.log(results.body);
-          setRoutines(results.body);
+          setUserRoutines(results.body.routines);
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }, [user, email]);
+  }, [user, email, setRoutines]);
 
   return (
     <div>
@@ -33,11 +33,6 @@ function Profile() {
         <div className="col-md text-center text-md-left">
           <h2>{nickname}</h2>
         </div>
-      </div>
-      <div className="row">
-        <pre className="col-12 text-light bg-dark p-4">
-          {JSON.stringify(user, null, 2)}
-        </pre>
       </div>
     </div>
   );
